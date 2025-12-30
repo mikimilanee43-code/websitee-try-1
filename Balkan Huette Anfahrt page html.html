@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anfahrt - Balkan-Hütte</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: #fff;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .nav-left, .nav-right {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-center {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            height: 80px;
+            width: auto;
+            object-fit: contain;
+            display: block;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+            white-space: nowrap;
+        }
+
+        nav a:hover {
+            color: #C41E3A;
+        }
+
+        nav a.active {
+            color: #C41E3A;
+        }
+
+        /* Page Header */
+        .page-header {
+            background-color: #C41E3A;
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+        }
+
+        /* Map Section */
+        .map-section {
+            width: 100%;
+            height: 500px;
+            background-color: #ddd;
+        }
+
+        .map-section iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Contact Info Section */
+        .contact-info-section {
+            background-color: #f5f5f5;
+            padding: 4rem 2rem;
+        }
+
+        .contact-info-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-info-box {
+            background-color: white;
+            padding: 3rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-top: 4px solid #C41E3A;
+        }
+
+        .contact-info-box h2 {
+            color: #C41E3A;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .info-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .info-label {
+            font-weight: bold;
+            color: #C41E3A;
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .info-text {
+            color: #555;
+            font-size: 1.2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-left, .nav-right {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .map-section {
+                height: 350px;
+            }
+
+            .contact-info-box {
+                padding: 2rem;
+            }
+
+            .contact-info-box h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="nav-left">
+                <a href="index.html">HOME</a>
+                <a href="restaurant.html">RESTAURANT</a>
+                <a href="speisekarte.html">SPEISEKARTE</a>
+            </div>
+            <div class="nav-center">
+                <img src="https://i.ibb.co/8gYQDNh6/balkan-huette-logo-seit1980.jpg" alt="Balkan-Hütte Logo" class="logo">
+            </div>
+            <div class="nav-right">
+                <a href="reservierung.html">RESERVIERUNG</a>
+                <a href="anfahrt.html" class="active">ANFAHRT</a>
+                <a href="kontakt.html">KONTAKT</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1>So finden Sie uns</h1>
+    </section>
+
+    <!-- Map Section -->
+    <section class="map-section">
+        <iframe 
+            src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=Landauer+Weg+31,+28279+Bremen,+Habenhausen&zoom=15" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+    </section>
+
+    <!-- Contact Info Section -->
+    <section class="contact-info-section">
+        <div class="contact-info-container">
+            <div class="contact-info-box">
+                <h2>Balkan-Hütte</h2>
+                <div class="info-item">
+                    <div class="info-label">Adresse</div>
+                    <div class="info-text">Landauer Weg 31</div>
+                    <div class="info-text">28279 Bremen</div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

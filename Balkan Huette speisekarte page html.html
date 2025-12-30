@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speisekarte - Balkan-Hütte</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: #fff;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .nav-left, .nav-right {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-center {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            height: 80px;
+            width: auto;
+            object-fit: contain;
+            display: block;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+            white-space: nowrap;
+        }
+
+        nav a:hover {
+            color: #C41E3A;
+        }
+
+        nav a.active {
+            color: #C41E3A;
+        }
+
+        /* Page Header */
+        .page-header {
+            background-color: #C41E3A;
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+        }
+
+        /* Slideshow Section */
+        .slideshow-section {
+            padding: 4rem 2rem;
+            background-color: #f5f5f5;
+        }
+
+        .slideshow-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .slideshow-wrapper {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+            background-color: #ddd;
+        }
+
+        .slide {
+            display: none;
+            width: 100%;
+            height: 100%;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 1.5rem;
+            background-color: #ddd;
+        }
+
+        .slide.active {
+            display: flex;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Slideshow controls */
+        .slideshow-controls {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .dot {
+            height: 15px;
+            width: 15px;
+            margin: 0 5px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .dot.active {
+            background-color: #C41E3A;
+        }
+
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0,0,0,0.5);
+            color: white;
+            padding: 1rem;
+            cursor: pointer;
+            font-size: 1.5rem;
+            border: none;
+            transition: background-color 0.3s;
+        }
+
+        .prev:hover, .next:hover {
+            background-color: rgba(196,30,58,0.8);
+        }
+
+        .prev {
+            left: 10px;
+        }
+
+        .next {
+            right: 10px;
+        }
+
+        /* Menu Cards Section */
+        .menu-cards-section {
+            padding: 4rem 2rem;
+            background-color: #fff;
+        }
+
+        .menu-cards-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .menu-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .menu-card-single {
+            grid-column: 1 / -1;
+            max-width: 500px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .menu-card {
+            background-color: #f9f9f9;
+            border: 2px solid #ddd;
+            padding: 3rem 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            color: #333;
+            display: block;
+        }
+
+        .menu-card:hover {
+            background-color: #C41E3A;
+            border-color: #C41E3A;
+            color: white;
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .menu-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .menu-card p {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-left, .nav-right {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .slideshow-wrapper {
+                height: 300px;
+            }
+
+            .menu-cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .prev, .next {
+                padding: 0.5rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="nav-left">
+                <a href="index.html">HOME</a>
+                <a href="restaurant.html">RESTAURANT</a>
+                <a href="speisekarte.html" class="active">SPEISEKARTE</a>
+            </div>
+            <div class="nav-center">
+                <img src="https://i.ibb.co/8gYQDNh6/balkan-huette-logo-seit1980.jpg" alt="Balkan-Hütte Logo" class="logo">
+            </div>
+            <div class="nav-right">
+                <a href="reservierung.html">RESERVIERUNG</a>
+                <a href="anfahrt.html">ANFAHRT</a>
+                <a href="kontakt.html">KONTAKT</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1>Unsere Speisekarte</h1>
+    </section>
+
+    <!-- Slideshow Section -->
+    <section class="slideshow-section">
+        <div class="slideshow-container">
+            <div class="slideshow-wrapper">
+                <div class="slide active">
+                    [Bild vom Essen 1]
+                </div>
+                <div class="slide">
+                    [Bild vom Essen 2]
+                </div>
+                <div class="slide">
+                    [Bild vom Essen 3]
+                </div>
+                <button class="prev" onclick="changeSlide(-1)">❮</button>
+                <button class="next" onclick="changeSlide(1)">❯</button>
+            </div>
+            <div class="slideshow-controls">
+                <span class="dot active" onclick="currentSlide(0)"></span>
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Cards Section -->
+    <section class="menu-cards-section">
+        <div class="menu-cards-container">
+            <div class="menu-cards-grid">
+                <a href="speisekarte.pdf" class="menu-card" target="_blank">
+                    <h3>Speisekarte</h3>
+                    <p>PDF öffnen</p>
+                </a>
+                <a href="getraenkekarte.pdf" class="menu-card" target="_blank">
+                    <h3>Getränkekarte</h3>
+                    <p>PDF öffnen</p>
+                </a>
+            </div>
+            <a href="kinderkarte.pdf" class="menu-card menu-card-single" target="_blank">
+                <h3>Kinderkarte</h3>
+                <p>PDF öffnen</p>
+            </a>
+        </div>
+    </section>
+
+    <script>
+        let currentSlideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+
+        function showSlide(index) {
+            // Wrap around
+            if (index >= slides.length) currentSlideIndex = 0;
+            if (index < 0) currentSlideIndex = slides.length - 1;
+
+            // Hide all slides and deactivate dots
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+
+            // Show current slide and activate dot
+            slides[currentSlideIndex].classList.add('active');
+            dots[currentSlideIndex].classList.add('active');
+        }
+
+        function changeSlide(direction) {
+            currentSlideIndex += direction;
+            showSlide(currentSlideIndex);
+        }
+
+        function currentSlide(index) {
+            currentSlideIndex = index;
+            showSlide(currentSlideIndex);
+        }
+
+        // Auto-advance slides every 5 seconds
+        setInterval(() => {
+            currentSlideIndex++;
+            showSlide(currentSlideIndex);
+        }, 5000);
+    </script>
+</body>
+</html>

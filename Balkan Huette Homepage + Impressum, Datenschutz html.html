@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balkan-Hütte - Seit 1880</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: #fff;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .nav-left, .nav-right {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-center {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            height: 80px;
+            width: auto;
+            object-fit: contain;
+            display: block;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+            white-space: nowrap;
+        }
+
+        nav a:hover {
+            color: #C41E3A;
+        }
+
+        nav a.active {
+            color: #C41E3A;
+        }
+
+        /* Hero Section */
+        .hero {
+            background-color: #f5f5f5;
+            min-height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 400px;
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero-text {
+            max-width: 800px;
+        }
+
+        .hero-text h1 {
+            font-size: 2.5rem;
+            color: #C41E3A;
+            margin-bottom: 1rem;
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        /* About Section */
+        .about {
+            max-width: 900px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .about h2 {
+            font-size: 2rem;
+            color: #C41E3A;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .about p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+            text-align: justify;
+        }
+
+        /* Opening Hours Section */
+        .hours {
+            background-color: #C41E3A;
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .hours h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .hours-content {
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            line-height: 2;
+        }
+
+        .hours-content p {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #f5f5f5;
+            padding: 2rem;
+            border-top: 1px solid #ddd;
+        }
+
+        .footer-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .footer-section {
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            background-color: white;
+        }
+
+        .footer-header {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            background-color: #f9f9f9;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s;
+        }
+
+        .footer-header:hover {
+            background-color: #C41E3A;
+            color: white;
+        }
+
+        .footer-header h3 {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .footer-arrow {
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+
+        .footer-arrow.open {
+            transform: rotate(180deg);
+        }
+
+        .footer-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .footer-content.open {
+            max-height: 5000px;
+            transition: max-height 0.5s ease;
+        }
+
+        .footer-content-inner {
+            padding: 1.5rem;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .footer-content-inner h4 {
+            color: #C41E3A;
+            font-size: 1.1rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-content-inner h4:first-child {
+            margin-top: 0;
+        }
+
+        .footer-content-inner p {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-content-inner ul {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-content-inner a {
+            color: #C41E3A;
+            text-decoration: underline;
+        }
+
+        .contact-box-footer {
+            background-color: #f5f5f5;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-left: 3px solid #C41E3A;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-left, .nav-right {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+
+            .hero-text p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="nav-left">
+                <a href="index.html" class="active">HOME</a>
+                <a href="restaurant.html">RESTAURANT</a>
+                <a href="speisekarte.html">SPEISEKARTE</a>
+            </div>
+            <div class="nav-center">
+                <img src="https://i.ibb.co/8gYQDNh6/balkan-huette-logo-seit1980.jpg" alt="Balkan-Hütte Logo" class="logo" style="max-height: 80px; width: auto;">
+            </div>
+            <div class="nav-right">
+                <a href="reservierung.html">RESERVIERUNG</a>
+                <a href="anfahrt.html">ANFAHRT</a>
+                <a href="kontakt.html">KONTAKT</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-image">
+            [Bild: Essen oder Ambiente]
+        </div>
+        <div class="hero-text">
+            <h1>Herzlich Willkommen</h1>
+            <p>Genießen Sie authentische Balkan-Küche in familiärer Atmosphäre</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about">
+        <h2>Über Uns</h2>
+        <p>
+            Vor über 45 Jahren in Habenhausen eröffnet, erstrahlt die Balkan-Hütte heute in frischem Ambiente. Die Familie Zdravkovic verwöhnt ihre Gäste mit köstlichen, frisch zubereiteten Spezialitäten vom Balkan – darunter Grillteller, Ćevapčići und ein guter Sliwowitz. Genießen Sie die entspannte Atmosphäre und den herzlichen Service in unserem traditionsreichen Familienrestaurant.
+        </p>
+    </section>
+
+    <!-- Opening Hours Section -->
+    <section class="hours">
+        <h2>Öffnungszeiten</h2>
+        <div class="hours-content">
+            <p><strong>Montag:</strong> Ruhetag (außer an Feiertagen)</p>
+            <p><strong>Dienstag–Samstag:</strong> 17:30 – 22:00 Uhr</p>
+            <p><strong>Sonntag/Feiertage:</strong> 12:00 – 14:30 Uhr, 17:30 – 22:00 Uhr</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <!-- Impressum Section -->
+            <div class="footer-section">
+                <div class="footer-header" onclick="toggleFooter('impressum')">
+                    <h3>Impressum</h3>
+                    <span class="footer-arrow" id="impressum-arrow">▼</span>
+                </div>
+                <div class="footer-content" id="impressum-content">
+                    <div class="footer-content-inner">
+                        <h4>Angaben gemäß § 5 TMG</h4>
+                        <div class="contact-box-footer">
+                            Djurdja Zdravkovic<br>
+                            Restaurant Balkan-Hütte<br>
+                            Landauer Weg 31<br>
+                            28279 Bremen
+                        </div>
+
+                        <h4>Kontakt</h4>
+                        <p>
+                            Telefon: 0421-833135<br>
+                            E-Mail: balkanhuette1980@gmail.com
+                        </p>
+
+                        <h4>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</h4>
+                        <div class="contact-box-footer">
+                            Djurdja Zdravkovic<br>
+                            Landauer Weg 31<br>
+                            28279 Bremen
+                        </div>
+
+                        <h4>Streitschlichtung</h4>
+                        <p>Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: <a href="https://ec.europa.eu/consumers/odr" target="_blank">https://ec.europa.eu/consumers/odr</a>.</p>
+                        <p>Unsere E-Mail-Adresse finden Sie oben im Impressum.</p>
+                        <p>Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+
+                        <h4>Haftung für Inhalte</h4>
+                        <p>Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.</p>
+                        <p>Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.</p>
+
+                        <h4>Haftung für Links</h4>
+                        <p>Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar.</p>
+                        <p>Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Links umgehend entfernen.</p>
+
+                        <h4>Urheberrecht</h4>
+                        <p>Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers. Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch gestattet.</p>
+                        <p>Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte Dritter beachtet. Insbesondere werden Inhalte Dritter als solche gekennzeichnet. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Datenschutzerklärung Section -->
+            <div class="footer-section">
+                <div class="footer-header" onclick="toggleFooter('datenschutz')">
+                    <h3>Datenschutzerklärung</h3>
+                    <span class="footer-arrow" id="datenschutz-arrow">▼</span>
+                </div>
+                <div class="footer-content" id="datenschutz-content">
+                    <div class="footer-content-inner">
+                        <p>Verantwortliche Stelle im Sinne der Datenschutzgesetze, insbesondere der EU-Datenschutzgrundverordnung (DSGVO), ist:</p>
+
+                        <div class="contact-box-footer">
+                            <strong>Balkan-Hütte</strong><br>
+                            Inh. Djurdja Zdravkovic<br>
+                            Landauer Weg 31<br>
+                            28279 Bremen-Habenhausen<br>
+                            Tel. 0421-833135
+                        </div>
+
+                        <h4>Ihre Betroffenenrechte</h4>
+                        <p>Unter den angegebenen Kontaktdaten unseres Datenschutzbeauftragten können Sie jederzeit folgende Rechte ausüben:</p>
+                        <ul>
+                            <li>Auskunft über Ihre bei uns gespeicherten Daten und deren Verarbeitung,</li>
+                            <li>Berichtigung unrichtiger personenbezogener Daten,</li>
+                            <li>Löschung Ihrer bei uns gespeicherten Daten,</li>
+                            <li>Einschränkung der Datenverarbeitung, sofern wir Ihre Daten aufgrund gesetzlicher Pflichten noch nicht löschen dürfen,</li>
+                            <li>Widerspruch gegen die Verarbeitung Ihrer Daten bei uns und</li>
+                            <li>Datenübertragbarkeit, sofern Sie in die Datenverarbeitung eingewilligt haben oder einen Vertrag mit uns abgeschlossen haben.</li>
+                        </ul>
+                        <p>Sofern Sie uns eine Einwilligung erteilt haben, können Sie diese jederzeit mit Wirkung für die Zukunft widerrufen.</p>
+                        <p>Sie können sich jederzeit mit einer Beschwerde an die für Sie zuständige Aufsichtsbehörde wenden. Ihre zuständige Aufsichtsbehörde richtet sich nach dem Bundesland Ihres Wohnsitzes, Ihrer Arbeit oder der mutmaßlichen Verletzung. Eine Liste der Aufsichtsbehörden (für den nichtöffentlichen Bereich) mit Anschrift finden Sie unter: <a href="https://www.bfdi.bund.de/DE/Infothek/Anschriften_Links/anschriften_links-node.html" target="_blank">https://www.bfdi.bund.de/DE/Infothek/Anschriften_Links/anschriften_links-node.html</a>.</p>
+
+                        <h4>Zwecke der Datenverarbeitung durch die verantwortliche Stelle und Dritte</h4>
+                        <p>Wir verarbeiten Ihre personenbezogenen Daten nur zu den in dieser Datenschutzerklärung genannten Zwecken. Eine Übermittlung Ihrer persönlichen Daten an Dritte zu anderen als den genannten Zwecken findet nicht statt. Wir geben Ihre persönlichen Daten nur an Dritte weiter, wenn:</p>
+                        <ul>
+                            <li>Sie Ihre ausdrückliche Einwilligung dazu erteilt haben,</li>
+                            <li>die Verarbeitung zur Abwicklung eines Vertrags mit Ihnen erforderlich ist,</li>
+                            <li>die Verarbeitung zur Erfüllung einer rechtlichen Verpflichtung erforderlich ist,</li>
+                            <li>die Verarbeitung zur Wahrung berechtigter Interessen erforderlich ist und kein Grund zur Annahme besteht, dass Sie ein überwiegendes schutzwürdiges Interesse an der Nichtweitergabe Ihrer Daten haben.</li>
+                        </ul>
+
+                        <h4>Löschung bzw. Sperrung der Daten</h4>
+                        <p>Wir halten uns an die Grundsätze der Datenvermeidung und Datensparsamkeit. Wir speichern Ihre personenbezogenen Daten daher nur so lange, wie dies zur Erreichung der hier genannten Zwecke erforderlich ist oder wie es die vom Gesetzgeber vorgesehenen vielfältigen Speicherfristen vorsehen. Nach Fortfall des jeweiligen Zweckes bzw. Ablauf dieser Fristen werden die entsprechenden Daten routinemäßig und entsprechend den gesetzlichen Vorschriften gesperrt oder gelöscht.</p>
+
+                        <h4>Erfassung allgemeiner Informationen beim Besuch unserer Website</h4>
+                        <p>Wenn Sie auf unsere Website zugreifen, werden automatisch mittels eines Cookies Informationen allgemeiner Natur erfasst. Diese Informationen (Server-Logfiles) beinhalten etwa die Art des Webbrowsers, das verwendete Betriebssystem, den Domainnamen Ihres Internet-Service-Providers und ähnliches. Hierbei handelt es sich ausschließlich um Informationen, welche keine Rückschlüsse auf Ihre Person zulassen.</p>
+                        <p>Diese Informationen sind technisch notwendig, um von Ihnen angeforderte Inhalte von Webseiten korrekt auszuliefern und fallen bei Nutzung des Internets zwingend an. Sie werden insbesondere zu folgenden Zwecken verarbeitet:</p>
+                        <ul>
+                            <li>Sicherstellung eines problemlosen Verbindungsaufbaus der Website,</li>
+                            <li>Sicherstellung einer reibungslosen Nutzung unserer Website,</li>
+                            <li>Auswertung der Systemsicherheit und -stabilität sowie</li>
+                            <li>zu weiteren administrativen Zwecken.</li>
+                        </ul>
+                        <p>Die Verarbeitung Ihrer personenbezogenen Daten basiert auf unserem berechtigten Interesse aus den vorgenannten Zwecken zur Datenerhebung. Wir verwenden Ihre Daten nicht, um Rückschlüsse auf Ihre Person zu ziehen. Empfänger der Daten sind nur die verantwortliche Stelle und ggf. Auftragsverarbeiter.</p>
+                        <p>Anonyme Informationen dieser Art werden von uns ggfs. statistisch ausgewertet, um unseren Internetauftritt und die dahinterstehende Technik zu optimieren.</p>
+
+                        <h4>SSL-Verschlüsselung</h4>
+                        <p>Um die Sicherheit Ihrer Daten bei der Übertragung zu schützen, verwenden wir dem aktuellen Stand der Technik entsprechende Verschlüsselungsverfahren (z. B. SSL) über HTTPS.</p>
+
+                        <h4>Verwendung von Scriptbibliotheken (Google Webfonts)</h4>
+                        <p>Um unsere Inhalte browserübergreifend korrekt und grafisch ansprechend darzustellen, verwenden wir auf dieser Website Scriptbibliotheken und Schriftbibliotheken wie z. B. Google Webfonts (<a href="https://www.google.com/webfonts/" target="_blank">https://www.google.com/webfonts/</a>). Google Webfonts werden zur Vermeidung mehrfachen Ladens in den Cache Ihres Browsers übertragen. Falls der Browser die Google Webfonts nicht unterstützt oder den Zugriff unterbindet, werden Inhalte in einer Standardschrift angezeigt.</p>
+                        <p>Der Aufruf von Scriptbibliotheken oder Schriftbibliotheken löst automatisch eine Verbindung zum Betreiber der Bibliothek aus. Dabei ist es theoretisch möglich – aktuell allerdings auch unklar ob und ggf. zu welchen Zwecken – dass Betreiber entsprechender Bibliotheken Daten erheben.</p>
+                        <p>Die Datenschutzrichtlinie des Bibliothekbetreibers Google finden Sie hier: <a href="https://www.google.com/policies/privacy/" target="_blank">https://www.google.com/policies/privacy/</a></p>
+
+                        <h4>Verwendung von Google Maps</h4>
+                        <p>Diese Webseite verwendet Google Maps API, um geographische Informationen visuell darzustellen. Bei der Nutzung von Google Maps werden von Google auch Daten über die Nutzung der Kartenfunktionen durch Besucher erhoben, verarbeitet und genutzt. Nähere Informationen über die Datenverarbeitung durch Google können Sie den Google-Datenschutzhinweisen entnehmen. Dort können Sie im Datenschutzcenter auch Ihre persönlichen Datenschutz-Einstellungen verändern.</p>
+                        <p>Ausführliche Anleitungen zur Verwaltung der eigenen Daten im Zusammenhang mit Google-Produkten finden Sie hier.</p>
+
+                        <h4>Änderung unserer Datenschutzbestimmungen</h4>
+                        <p>Wir behalten uns vor, diese Datenschutzerklärung anzupassen, damit sie stets den aktuellen rechtlichen Anforderungen entspricht oder um Änderungen unserer Leistungen in der Datenschutzerklärung umzusetzen, z.B. bei der Einführung neuer Services. Für Ihren erneuten Besuch gilt dann die neue Datenschutzerklärung.</p>
+
+                        <h4>Fragen an den Datenschutzbeauftragten</h4>
+                        <p>Wenn Sie Fragen zum Datenschutz haben, schreiben Sie uns bitte eine E-Mail oder wenden Sie sich direkt an die für den Datenschutz verantwortliche Person in unserer Organisation:</p>
+
+                        <div class="contact-box-footer">
+                            <strong>Balkan-Hütte</strong><br>
+                            Inh. Djurdja Zdravkovic<br>
+                            Landauer Weg 31<br>
+                            28279 Bremen-Habenhausen<br>
+                            Tel. 0421-833135
+                        </div>
+
+                        <p>Bei Datenschutzanfragen rufen Sie uns bitte unter der genannten Telefonnummer an.</p>
+
+                        <p style="margin-top: 2rem; font-size: 0.85rem; color: #666;">Die Datenschutzerklärung wurde mit dem Datenschutzerklärungs-Generator der activeMind AG erstellt.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleFooter(section) {
+            const content = document.getElementById(section + '-content');
+            const arrow = document.getElementById(section + '-arrow');
+            
+            if (content.classList.contains('open')) {
+                content.classList.remove('open');
+                arrow.classList.remove('open');
+            } else {
+                content.classList.add('open');
+                arrow.classList.add('open');
+            }
+        }
+    </script>
+</body>
+</html>
